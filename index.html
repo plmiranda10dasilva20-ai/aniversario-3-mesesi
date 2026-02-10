@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 Meses com Minha Princesa 💙</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #dbeeff, #bcdcff);
+    color: #0a2a52;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.login, .content {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 30px 25px;
+    max-width: 700px;
+    width: 100%;
+    animation: fadeIn 1.5s ease;
+}
+
+h1 {
+    color: #2a6fd6;
+}
+
+input {
+    padding: 12px;
+    width: 80%;
+    max-width: 250px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    text-align: center;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #6fa8ff;
+    color: white;
+}
+
+button:hover {
+    background-color: #4f8dff;
+}
+
+.hidden {
+    display: none;
+}
+
+.time {
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.romantic-text {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-top: 20px;
+}
+
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+}
+
+.heart {
+    position: absolute;
+    font-size: 22px;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .romantic-text {
+        font-size: 17px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Música -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/X0G5dGqM1Jg?autoplay=1&loop=1&playlist=X0G5dGqM1Jg"
+frameborder="0"
+allow="autoplay">
+</iframe>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="login" id="login">
+    <div class="box">
+        <h1>💙 Área Secreta 💙</h1>
+        <p>Digite a senha para entrar</p>
+        <input type="password" id="password" placeholder="Senha">
+        <br>
+        <button onclick="checkPassword()">Entrar</button>
+        <p id="error" style="color:#ff6b6b;"></p>
+    </div>
+</div>
+
+<div class="content hidden" id="content">
+    <div class="box">
+        <h1>🌸 Feliz 3 Meses 🌸</h1>
+
+        <div class="time" id="time"></div>
+
+        <div class="romantic-text">
+            Minha princesa 💙,<br><br>
+            Desde o dia 10 de novembro, meu mundo ficou mais leve, mais bonito e mais azul.
+            Cada segundo ao seu lado é especial, e o tempo só prova o quanto o meu amor por você
+            cresce sem parar.<br><br>
+
+            Você é meu sorriso fácil, minha paz nos dias difíceis e o sonho mais bonito que a vida
+            me deu. Esses três meses são só o começo de uma história linda que eu quero viver
+            inteira ao seu lado.<br><br>
+
+            Feliz nosso aniversário de 3 meses, minha princesa.
+            Obrigado por existir, por me amar e por fazer meu coração bater mais forte.
+            Eu te amo infinitamente 💙🌸
+        </div>
+    </div>
+</div>
+
+<script>
+function checkPassword() {
+    const pass = document.getElementById("password").value;
+    if (pass === "1011") {
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("content").classList.remove("hidden");
+    } else {
+        document.getElementById("error").innerText = "Senha incorreta 💔";
+    }
+}
+
+function updateTime() {
+    const startDate = new Date(new Date().getFullYear() - 1, 10, 10);
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+    const seconds = Math.floor(diff / 1000) % 60;
+
+    document.getElementById("time").innerHTML =
+        `⏳ Estamos juntos há:<br><strong>${days} dias, ${hours}h ${minutes}min ${seconds}s</strong>`;
+}
+
+setInterval(updateTime, 1000);
+updateTime();
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = Math.random() > 0.5 ? "💙" : "🌸";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 4 + 5) + "s";
+    document.getElementById("hearts").appendChild(heart);
+
+    setTimeout(() => heart.remove(), 9000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
